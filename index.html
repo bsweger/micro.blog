@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+	<meta name="generator" content="Hugo 0.91.2" />
+
+  <title>
+      
+      Becky Sweger
+      
+  </title>
+
+</head>
+
+
+  <body>
+
+    
+
+	
+<div class="h-feed">
+
+	
+	
+	  <div class="h-entry">
+		
+			<h1><a href="https://beckysweger.com/2025/01/02/skip-a-job-in-a.html">Skip a GitHub workflow job when running on a fork</a></h1>
+		
+
+		<a href="https://beckysweger.com/2025/01/02/skip-a-job-in-a.html" class="u-url"><time class="dt-published" datetime="2025-01-02 20:06:59 -0500">Jan 2, 2025</time></a>
+
+		<div class="e-content">
+			 <p>Skipping GitHub action jobs on forked repos is a surprisingly hard thing to Google. Most advice says to:</p>
+<ul>
+<li>disable workflows on the forked repo</li>
+<li>hard-code a check for the repo&rsquo;s owner name to determine whether or not it&rsquo;s a fork</li>
+</ul>
+<p>But I work on a <a href="https://github.com/reichlab/variant-nowcast-hub">repository at Day Job™️</a> that has many workflows, some of which are useful to external contributors who fork. Also, why give people manual instructions for something a computer can check?</p>
+<p>Secondly, the workflow in question is derived from a template used by other repository owners in our ecosystem. Ideally, there would be a solution that doesn&rsquo;t hard-code an owner name (so we can update the template itself).</p>
+<p>After following <a href="https://til.simonwillison.net/github-actions/dump-context">this advice from Simon Willison</a> about dumping the GitHub actions context, I stumbled upon <code>github.event.repository.fork</code> 🎉</p>
+<p>Here&rsquo;s what it looks like in practice—the job below will not run on a fork:</p>
+<pre tabindex="0"><code>jobs:
+  your-job:
+    # Don't run on forked repositories
+    if: github.event.repository.fork != true
+    runs-on: ubuntu-latest
+</code></pre>
+		</div>
+	  </div>
+	
+	  <div class="h-entry">
+		
+			<h1><a href="https://beckysweger.com/2024/12/31/this-aged-well-etc-etchttpsjawnsclubbendystraw.html">🎶 It&#39;s the most wonderful time of the year to mess around with your blog</a></h1>
+		
+
+		<a href="https://beckysweger.com/2024/12/31/this-aged-well-etc-etchttpsjawnsclubbendystraw.html" class="u-url"><time class="dt-published" datetime="2024-12-31 17:41:34 -0500">Dec 31, 2024</time></a>
+
+		<div class="e-content">
+			 <p>This idea did not age particularly well, given 2024&rsquo;s various WordPress dramas.</p>
+
+		
+			<blockquote class="toot-blockquote" cite="https://jawns.club@bendystraw/status/109979304645203691">
+				<div class="toot-header">
+					<a class="toot-profile" href="https://jawns.club/@bendystraw" rel="noopener">
+						<img
+							src="https://cdn.masto.host/jawnsclub/accounts/avatars/109/343/210/363/981/110/original/b91f4f8fd048987c.jpeg"
+							alt="Mastodon avatar for @bendystraw@jawns.club"
+							loading="lazy"
+							aria-hidden="true"
+						/>
+					</a>
+					<div class="toot-author">
+						<a class="toot-author-name" href="https://jawns.club/@bendystraw" rel="noopener">Becky Sweger</a>
+						<a class="toot-author-handle" href="https://jawns.club/@bendystraw" rel="noopener">@bendystraw@jawns.club</a>
+					</div>
+				</div><p>Considering going back to good old Wordpress (hosted, this time) so I can focus on actually writing blogs instead of reminding myself how Hugo works every 18 months or so</p>
+				<div class="toot-footer">
+					<a href="https://jawns.club/@bendystraw/109979304645203691" class="toot-date" rel="noopener">1:03 AM • March 7, 2023</a>&nbsp;<span class="pokey">(UTC)</span>
+				</div>
+			</blockquote>
+<p>So I moved everything to micro.blog, which lets you write in markdown while using a hosted service, so you don&rsquo;t have to upgrade hugo and remember how it works and submit a pull request whenever you want to write something.</p>
+<p>Also, it is my fervent hope that having a &ldquo;micro&rdquo; blog will silence the nagging voice insisting that each post must be a carefully crafted, highly-edited endeavor.</p>
+<p>2025 is the year of blogging&ndash;for real this time!</p>
+
+		</div>
+	  </div>
+	
+	  <div class="h-entry">
+		
+			<h1><a href="https://beckysweger.com/2024/03/23/the-technical-debt-of-a.html">The technical debt of a thousand paper cuts</a></h1>
+		
+
+		<a href="https://beckysweger.com/2024/03/23/the-technical-debt-of-a.html" class="u-url"><time class="dt-published" datetime="2024-03-23 14:05:05 -0500">Mar 23, 2024</time></a>
+
+		<div class="e-content">
+			 <!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+
+		</div>
+	  </div>
+	
+	  <div class="h-entry">
+		
+			<h1><a href="https://beckysweger.com/2024/01/08/theres-more-to-tech-than.html">There&#39;s more to tech than startups and large software companies</a></h1>
+		
+
+		<a href="https://beckysweger.com/2024/01/08/theres-more-to-tech-than.html" class="u-url"><time class="dt-published" datetime="2024-01-08 23:29:52 -0500">Jan 8, 2024</time></a>
+
+		<div class="e-content">
+			 <!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+
+		</div>
+	  </div>
+	
+	  <div class="h-entry">
+		
+			<h1><a href="https://beckysweger.com/2024/01/03/review-machine-learning-engineering-with.html">Review: Machine Learning Engineering With Python</a></h1>
+		
+
+		<a href="https://beckysweger.com/2024/01/03/review-machine-learning-engineering-with.html" class="u-url"><time class="dt-published" datetime="2024-01-03 16:39:30 -0500">Jan 3, 2024</time></a>
+
+		<div class="e-content">
+			 <!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+
+		</div>
+	  </div>
+	
+	  <div class="h-entry">
+		
+			<h1><a href="https://beckysweger.com/2021/12/23/we-named-our-data-warehouse.html">We named our data warehouse after a bacteria</a></h1>
+		
+
+		<a href="https://beckysweger.com/2021/12/23/we-named-our-data-warehouse.html" class="u-url"><time class="dt-published" datetime="2021-12-23 19:45:00 -0500">Dec 23, 2021</time></a>
+
+		<div class="e-content">
+			 <!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+
+		</div>
+	  </div>
+	
+	  <div class="h-entry">
+		
+			<h1><a href="https://beckysweger.com/2020/10/18/tech-hiring-the-streetlight-effect.html">Tech hiring: the streetlight effect</a></h1>
+		
+
+		<a href="https://beckysweger.com/2020/10/18/tech-hiring-the-streetlight-effect.html" class="u-url"><time class="dt-published" datetime="2020-10-18 20:21:00 -0500">Oct 18, 2020</time></a>
+
+		<div class="e-content">
+			 <!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+
+		</div>
+	  </div>
+	
+
+</div>
+
+
+    
+    
+
+  </body>
+
+</html>
