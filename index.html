@@ -24,6 +24,56 @@
 	
 	  <div class="h-entry">
 		
+			<h1><a href="https://beckysweger.com/2025/01/09/im-gonna-write-about-uv.html">uv run redux</a></h1>
+		
+
+		<a href="https://beckysweger.com/2025/01/09/im-gonna-write-about-uv.html" class="u-url"><time class="dt-published" datetime="2025-01-09 20:29:14 -0500">Jan 9, 2025</time></a>
+
+		<div class="e-content">
+			 <p>I&rsquo;m gonna write about <code>uv run</code> again, because it&rsquo;s just that handy!</p>
+<p>Lou Franco <a href="https://mastodon.social/@loufranco/113783255399204720">asked a very good question</a> about the <a href="https://beckysweger.com/2025/01/06/change-your-life-with-uv.html"><code>uv run</code> post from earlier in the week</a>:</p>
+<blockquote>
+<p>is there much that the sharer has to do? (I have a requirements.txt file)</p>
+</blockquote>
+<p>Nope! Assuming that the script and requirements.txt file are in the same directory (and that the person running the script has uv installed):</p>
+<p><code>uv run --with-requirements requirements.txt very-useful-script.py</code></p>
+<p>You could also <a href="https://docs.astral.sh/uv/guides/scripts/#declaring-script-dependencies">embed the requirements in the script itself</a>. Or install dependencies from <code>pyproject.toml</code> Or use an index other than PyPI. Or load some environment variables before running the script. It&rsquo;s all here: <a href="https://docs.astral.sh/uv/reference/cli/#uv-run">https://docs.astral.sh/uv/reference/cli/#uv-run</a></p>
+<p>It&rsquo;s one of the great things about uv. You can use it to manage an entire Python project, but you don&rsquo;t <em>have</em> to: just pick and choose what you need.</p>
+<p>P.S. Lou <a href="https://loufranco.com/">has a blog</a> and is <a href="https://loufranco.com/tech-debt-book">writing a book about tech debt</a>. You should read them!</p>
+
+		</div>
+	  </div>
+	
+	  <div class="h-entry">
+		
+			<h1><a href="https://beckysweger.com/2025/01/06/change-your-life-with-uv.html">Python &#43; uv run: sharing is caring</a></h1>
+		
+
+		<a href="https://beckysweger.com/2025/01/06/change-your-life-with-uv.html" class="u-url"><time class="dt-published" datetime="2025-01-06 09:55:00 -0500">Jan 6, 2025</time></a>
+
+		<div class="e-content">
+			 <p>Imagine that your colleagues—very smart, busy people who mostly program in R—need a dataset that&rsquo;s difficult to create. And they want the ability to recreate the dataset as often as necessary. The freedom to tweak the code and experiment with the inputs.</p>
+<h2 id="without-uv">Without uv</h2>
+<p>Good news! You have a script that does exactly what they need. It&rsquo;s written in Python instead of R, but anyone can run it by following these simple steps:</p>
+<ol>
+<li>Install Python. Python is already on your laptop, but don&rsquo;t use that one. Install a different Python. Actually, just install pyenv and then use pyenv to install Python.</li>
+<li>Create a virtual environment. It&rsquo;s tempting to skip this step, but please don&rsquo;t. You can use python, pyenv-virtualenv, poetry, conda, pdm, hatch, pipenv, rye, or uv to create a virtual environment. I will make a recommendation. Next month I will make a different recommendation.</li>
+<li>Activate your virtual environment.</li>
+<li>The script uses polars, biopython, and zstandard, so use pip to install those dependencies. Don&rsquo;t install polars 1.17.0, everything will break.</li>
+<li>Run the script: <code>python very-useful-script.py</code></li>
+</ol>
+<h2 id="with-uv">With uv</h2>
+<p>Good news! You have a script that does exactly what they need. It&rsquo;s written in Python instead of R, but anyone can run it by following these simple steps:</p>
+<ol>
+<li>Install <a href="https://docs.astral.sh/uv/">uv</a></li>
+<li>Use <a href="https://docs.astral.sh/uv/guides/scripts/"><code>uv run</code></a> to execute the script: <code>uv run very-useful-script.py</code></li>
+</ol>
+
+		</div>
+	  </div>
+	
+	  <div class="h-entry">
+		
 			<h1><a href="https://beckysweger.com/2025/01/02/skip-a-job-in-a.html">Skip a GitHub workflow job when running on a fork</a></h1>
 		
 
