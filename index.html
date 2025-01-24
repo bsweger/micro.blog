@@ -24,6 +24,111 @@
 	
 	  <div class="h-entry">
 		
+			<h1><a href="https://beckysweger.com/2025/01/23/more-machines-more-python-setup.html">More machines, more Python setup problems</a></h1>
+		
+
+		<a href="https://beckysweger.com/2025/01/23/more-machines-more-python-setup.html" class="u-url"><time class="dt-published" datetime="2025-01-23 21:30:31 -0500">Jan 23, 2025</time></a>
+
+		<div class="e-content">
+			 <p>After working at a large tech company for nearly six years, I was unprepared for how spoiled I&rsquo;d gotten when working on teams with uniform technology. Teams where everyone is admin on their corporate-issued laptops all running the same OS. Teams where 85% of software engineers use the same IDE.</p>
+<p>Within that kind of environment, if you write instructions for setting up and contributing to a Python project, those instructions will almost certainly work on everyone else&rsquo;s machine.</p>
+<p>But when no two teammates—let alone potential contributors to our open source software—have the same setup, all bets are off:</p>
+<ul>
+<li>IT restrictions block the thing</li>
+<li>The Makefile doesn&rsquo;t run on Windows</li>
+<li>Conda edited .bashrc and stuck its base Python environment at the beginning of $PATH</li>
+<li>IDE can&rsquo;t find the virtual environment</li>
+<li>Anti-virus blocks the other thing</li>
+<li>Docker malarkey</li>
+</ul>
+<p>Hence, all the <a href="https://beckysweger.com/2025/01/09/im-gonna-write-about-uv.html">uv</a> <a href="https://beckysweger.com/2025/01/14/python-uv-contributing-is-caring.html">posts</a>. Sure, the speed is nice, and <a href="https://beckysweger.com/2025/01/06/change-your-life-with-uv.html">using <code>uv run</code> to share scripts is A++</a>. But it&rsquo;s also the only all-in-one Python installer, venv, and dependency management tool we&rsquo;ve tried that actually does what we need and so far runs as expected on everyone&rsquo;s machine.</p>
+
+		</div>
+	  </div>
+	
+	  <div class="h-entry">
+		
+			<h1><a href="https://beckysweger.com/2025/01/16/living-that-tokenfree-life.html">Living that token-free life</a></h1>
+		
+
+		<a href="https://beckysweger.com/2025/01/16/living-that-tokenfree-life.html" class="u-url"><time class="dt-published" datetime="2025-01-16 20:23:16 -0500">Jan 16, 2025</time></a>
+
+		<div class="e-content">
+			 <p>Finally published something to PyPi (Python&rsquo;s packaging index) after more than a decade of writing Python. It&rsquo;s not exactly new news, but the <a href="https://docs.pypi.org/trusted-publishers/">trusted publishing feature</a> is A++  and straightforward to set up if you use GitHub actions to write to PyPI</p>
+<p>When they first hear the lack of tokens, people can be pretty skeptical about OIDC + GitHub Actions + PyPy/AWS/whatever.  We&rsquo;ve been conditioned to equate long, weird-looking strings with security, so the idea of <em>not</em> having a long, weird-looking string seems wrong somehow.</p>
+<p>I&rsquo;ve struggled to explain clearly how the pieces fit together and was happy to stumble on this 2023 explainer from Trail of Bits, who worked with the Python Packaging Authority (PyPA) to implement trusted publishers. Bookmarked!</p>
+<p><a href="https://blog.trailofbits.com/2023/05/23/trusted-publishing-a-new-benchmark-for-packaging-security/">blog.trailofbits.com/2023/05/2&hellip;</a></p>
+
+		</div>
+	  </div>
+	
+	  <div class="h-entry">
+		
+			<h1><a href="https://beckysweger.com/2025/01/14/python-uv-contributing-is-caring.html">Python uv: slaying the project setup yaks</a></h1>
+		
+
+		<a href="https://beckysweger.com/2025/01/14/python-uv-contributing-is-caring.html" class="u-url"><time class="dt-published" datetime="2025-01-14 10:26:00 -0500">Jan 14, 2025</time></a>
+
+		<div class="e-content">
+			 <p>Life with <code>uv run</code> is going well. The <a href="https://beckysweger.com/2025/01/06/change-your-life-with-uv.html">aforementioned smart, busy colleagues who mostly program in R</a> have <code>uv</code> installed on their machines and the shared Python scripts are flowing.</p>
+<p>You&rsquo;re now ready for Phase 2 of &ldquo;no more Futzing Around™️ with Python.&rdquo;</p>
+<p>One day, a colleague wants to update an internally-developed Python package. That person may not write a lot of Python, but they can certainly fix a straightforward bug or typo. So they refer to <code>CONTRIBUTING.md</code> and find the following instructions for creating a dev environment:</p>
+<ol>
+<li>Clone the repo.</li>
+<li>Look at <code>.python-version</code> to find out which version of Python we&rsquo;re using for development.</li>
+<li>Install pyenv and use pyenv to install the above version of Python.</li>
+<li>Create a virtual environment. It’s tempting to skip this step, but please don’t. You can use python, pyenv-virtualenv, poetry, conda, pdm, hatch, pipenv, rye, or uv to create a virtual environment. <code>CONTRIBUTING.md</code> recommends whatever tool its author likes.</li>
+<li>Activate the virtual environment.</li>
+<li>Install the package dev dependencies: <code>pip install -r requirements-dev.txt</code></li>
+<li>Install the package as an editable module: <code>pip install -e .</code></li>
+<li>Before making your change run the tests to ensure all is well: <code>pytest</code></li>
+</ol>
+<p>Now that everyone on the team has <code>uv</code> installed, you can simplify <code>CONTRIBUTING.md</code> to something like this:</p>
+<ol>
+<li>Clone the repo.</li>
+<li>Create a virtual environment: <code>uv venv --seed</code>¹</li>
+<li>Install the package dev dependencies: <code>uv pip install -r requirements-dev.txt</code></li>
+<li>Install the package as an editable module: <code>uv pip install -e .</code></li>
+<li>Before making your change run the tests to ensure all is well: <code>uv run pytest</code></li>
+</ol>
+<p>I like this approach for two reasons:</p>
+<ol>
+<li>It removes barriers to entry for potential collaborators.</li>
+<li>Yet it doesn&rsquo;t require existing contributors to change the way they work. People are free to handle their own Python installs, virtual environments, and dependencies as they see fit (as long as they generate annotated requirements.txt files when updating dependencies).²</li>
+</ol>
+<p>¹ <a href="https://beckysweger.com/2025/01/14/seeding-virtual-environments-with-pip.html"><code>--seed</code> tells <code>uv</code> to include seed packages like <code>pip</code> and <code>setuptools</code> in the virtual environment it creates</a>. It&rsquo;s helpful for people who would rather activate the environment instead of prefixing every command with <code>uv run</code> or <code>uv pip</code>.</p>
+<p>² Add <code>uv.lock</code> to <code>.gitignore</code> to remove any confusion on this point.</p>
+
+		</div>
+	  </div>
+	
+	  <div class="h-entry">
+		
+			<h1><a href="https://beckysweger.com/2025/01/14/seeding-virtual-environments-with-pip.html">Seeding uv virtual environments with pip</a></h1>
+		
+
+		<a href="https://beckysweger.com/2025/01/14/seeding-virtual-environments-with-pip.html" class="u-url"><time class="dt-published" datetime="2025-01-14 09:03:13 -0500">Jan 14, 2025</time></a>
+
+		<div class="e-content">
+			 <p>It&rsquo;s great that a <a href="https://docs.astral.sh/uv/reference/cli/#uv-venv">uv-created Python virtual environment</a> lives where you&rsquo;d expect it to be: in a folder called <code>.venv</code>. You can still use your muscle memory <code>source .venv/bin/activate</code> incantation to activate it.</p>
+<p>But other muscle memory commands don&rsquo;t work as well, especially those related to <code>pip</code>. By default,  <code>pip</code> isn&rsquo;t installed into uv virtual environments. So you have to do things like <code>uv pip list</code> instead of <code>pip list</code>.</p>
+<p>The uv <code>--seed</code> option fixes that by installing <code>pip</code> and other seed packages into the new environment: <code>uv venv --seed</code>.</p>
+<p>I ended up aliasing <code>uv venv</code> to <code>uv venv --seed</code> with the following function in ye old <code>.zshrc</code>:¹</p>
+<pre tabindex="0"><code class="language-script" data-lang="script">uv() {
+  if [ &quot;$1&quot; = &quot;venv&quot; ]; then
+    shift
+    command uv venv --shell &quot;$@&quot;
+  else
+    command uv &quot;$@&quot;
+  fi
+}
+</code></pre><p>¹ Here&rsquo;s a scenario where GitHub Copilot is helpful.</p>
+
+		</div>
+	  </div>
+	
+	  <div class="h-entry">
+		
 			<h1><a href="https://beckysweger.com/2025/01/09/im-gonna-write-about-uv.html">uv run redux</a></h1>
 		
 
