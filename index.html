@@ -24,6 +24,74 @@
 	
 	  <div class="h-entry">
 		
+			<h1><a href="https://beckysweger.com/2025/02/04/using-polars-for-anonymous-access.html">Using Polars for anonymous access to public data on S3</a></h1>
+		
+
+		<a href="https://beckysweger.com/2025/02/04/using-polars-for-anonymous-access.html" class="u-url"><time class="dt-published" datetime="2025-02-04 20:45:57 -0500">Feb 4, 2025</time></a>
+
+		<div class="e-content">
+			 <p><a href="https://docs.pola.rs/">Polars</a> is a really handy go-to for working with public data hosted on AWS S3. Using Polars to get a <a href="https://docs.pola.rs/api/python/stable/reference/dataframe/index.html">DataFrame</a> via a bucket&rsquo;s HTTPS endpoint is straightforward:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">&gt;&gt;&gt;</span> df <span style="color:#f92672">=</span> pl<span style="color:#f92672">.</span>read_parquet(
+    <span style="color:#e6db74">&#34;https://ookla-open-data.s3.us-west-2.amazonaws.com/parquet/performance/type=fixed/year=2024/quarter=4/2024-10-01_performance_fixed_tiles.parquet&#34;</span>)
+
+<span style="color:#f92672">&gt;&gt;&gt;</span> df<span style="color:#f92672">.</span>select([<span style="color:#e6db74">&#34;quadkey&#34;</span>, <span style="color:#e6db74">&#34;avg_d_kbps&#34;</span>, <span style="color:#e6db74">&#34;avg_u_kbps&#34;</span>, <span style="color:#e6db74">&#34;tests&#34;</span>])<span style="color:#f92672">.</span>head()
+<span style="color:#960050;background-color:#1e0010">┌──────────────────┬────────────┬────────────┬───────┐</span>
+<span style="color:#960050;background-color:#1e0010">│</span> quadkey          <span style="color:#960050;background-color:#1e0010">┆</span> avg_d_kbps <span style="color:#960050;background-color:#1e0010">┆</span> avg_u_kbps <span style="color:#960050;background-color:#1e0010">┆</span> tests <span style="color:#960050;background-color:#1e0010">│</span>
+<span style="color:#960050;background-color:#1e0010">│</span> <span style="color:#f92672">---</span>              <span style="color:#960050;background-color:#1e0010">┆</span> <span style="color:#f92672">---</span>        <span style="color:#960050;background-color:#1e0010">┆</span> <span style="color:#f92672">---</span>        <span style="color:#960050;background-color:#1e0010">┆</span> <span style="color:#f92672">---</span>   <span style="color:#960050;background-color:#1e0010">│</span>
+<span style="color:#960050;background-color:#1e0010">│</span> str              <span style="color:#960050;background-color:#1e0010">┆</span> i64        <span style="color:#960050;background-color:#1e0010">┆</span> i64        <span style="color:#960050;background-color:#1e0010">┆</span> i64   <span style="color:#960050;background-color:#1e0010">│</span>
+<span style="color:#960050;background-color:#1e0010">╞══════════════════╪════════════╪════════════╪═══════╡</span>
+<span style="color:#960050;background-color:#1e0010">│</span> <span style="color:#ae81ff">0022133222312323</span> <span style="color:#960050;background-color:#1e0010">┆</span> <span style="color:#ae81ff">33682</span>      <span style="color:#960050;background-color:#1e0010">┆</span> <span style="color:#ae81ff">3278</span>       <span style="color:#960050;background-color:#1e0010">┆</span> <span style="color:#ae81ff">1</span>     <span style="color:#960050;background-color:#1e0010">│</span>
+<span style="color:#960050;background-color:#1e0010">│</span> <span style="color:#ae81ff">0022133222330031</span> <span style="color:#960050;background-color:#1e0010">┆</span> <span style="color:#ae81ff">97271</span>      <span style="color:#960050;background-color:#1e0010">┆</span> <span style="color:#ae81ff">14686</span>      <span style="color:#960050;background-color:#1e0010">┆</span> <span style="color:#ae81ff">2</span>     <span style="color:#960050;background-color:#1e0010">│</span>
+<span style="color:#960050;background-color:#1e0010">│</span> <span style="color:#ae81ff">0022133222330033</span> <span style="color:#960050;background-color:#1e0010">┆</span> <span style="color:#ae81ff">92047</span>      <span style="color:#960050;background-color:#1e0010">┆</span> <span style="color:#ae81ff">27325</span>      <span style="color:#960050;background-color:#1e0010">┆</span> <span style="color:#ae81ff">1</span>     <span style="color:#960050;background-color:#1e0010">│</span>
+<span style="color:#960050;background-color:#1e0010">│</span> <span style="color:#ae81ff">0022232311221201</span> <span style="color:#960050;background-color:#1e0010">┆</span> <span style="color:#ae81ff">537</span>        <span style="color:#960050;background-color:#1e0010">┆</span> <span style="color:#ae81ff">255</span>        <span style="color:#960050;background-color:#1e0010">┆</span> <span style="color:#ae81ff">1</span>     <span style="color:#960050;background-color:#1e0010">│</span>
+<span style="color:#960050;background-color:#1e0010">│</span> <span style="color:#ae81ff">0022302331120033</span> <span style="color:#960050;background-color:#1e0010">┆</span> <span style="color:#ae81ff">104525</span>     <span style="color:#960050;background-color:#1e0010">┆</span> <span style="color:#ae81ff">4896</span>       <span style="color:#960050;background-color:#1e0010">┆</span> <span style="color:#ae81ff">1</span>     <span style="color:#960050;background-color:#1e0010">│</span>
+<span style="color:#960050;background-color:#1e0010">└──────────────────┴────────────┴────────────┴───────┘</span>
+</code></pre></div><p>However, to read hive-partitioned S3 data or to specify a glob pattern, you&rsquo;ll need to use the <code>s3://</code> protocol. Polars supports this, but the documentation doesn&rsquo;t provide a clear example for bypassing a credentials check and accessing public data anonymously.</p>
+<p>Using the same dataset as above, here&rsquo;s the <code>storage_options</code> incantation that&rsquo;s akin to the AWS ClI&rsquo;s <code>--no-sign-request</code> option. In this example, 2024 is further partitioned into quarters; Polars detects the partitions and slurps multiple files into a single dataframe.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">&gt;&gt;&gt;</span> df1 <span style="color:#f92672">=</span> pl<span style="color:#f92672">.</span>read_parquet(
+<span style="color:#f92672">&gt;&gt;&gt;</span>    <span style="color:#e6db74">&#34;s3://ookla-open-data/parquet/performance/type=fixed/year=2024/&#34;</span>,
+<span style="color:#f92672">&gt;&gt;&gt;</span>    storage_options<span style="color:#f92672">=</span>{<span style="color:#e6db74">&#34;skip_signature&#34;</span>: <span style="color:#e6db74">&#34;true&#34;</span>}
+)
+
+<span style="color:#f92672">&gt;&gt;&gt;</span> df1<span style="color:#f92672">.</span>select([<span style="color:#e6db74">&#34;quarter&#34;</span>, <span style="color:#e6db74">&#34;quadkey&#34;</span>, <span style="color:#e6db74">&#34;avg_d_kbps&#34;</span>, <span style="color:#e6db74">&#34;avg_u_kbps&#34;</span>, <span style="color:#e6db74">&#34;tests&#34;</span>])<span style="color:#f92672">.</span>head()
+<span style="color:#960050;background-color:#1e0010">┌─────────┬──────────────────┬────────────┬────────────┬───────┐</span>
+<span style="color:#960050;background-color:#1e0010">│</span> quarter <span style="color:#960050;background-color:#1e0010">┆</span> quadkey          <span style="color:#960050;background-color:#1e0010">┆</span> avg_d_kbps <span style="color:#960050;background-color:#1e0010">┆</span> avg_u_kbps <span style="color:#960050;background-color:#1e0010">┆</span> tests <span style="color:#960050;background-color:#1e0010">│</span>
+<span style="color:#960050;background-color:#1e0010">│</span> <span style="color:#f92672">---</span>     <span style="color:#960050;background-color:#1e0010">┆</span> <span style="color:#f92672">---</span>              <span style="color:#960050;background-color:#1e0010">┆</span> <span style="color:#f92672">---</span>        <span style="color:#960050;background-color:#1e0010">┆</span> <span style="color:#f92672">---</span>        <span style="color:#960050;background-color:#1e0010">┆</span> <span style="color:#f92672">---</span>   <span style="color:#960050;background-color:#1e0010">│</span>
+<span style="color:#960050;background-color:#1e0010">│</span> i64     <span style="color:#960050;background-color:#1e0010">┆</span> str              <span style="color:#960050;background-color:#1e0010">┆</span> i64        <span style="color:#960050;background-color:#1e0010">┆</span> i64        <span style="color:#960050;background-color:#1e0010">┆</span> i64   <span style="color:#960050;background-color:#1e0010">│</span>
+<span style="color:#960050;background-color:#1e0010">╞═════════╪══════════════════╪════════════╪════════════╪═══════╡</span>
+<span style="color:#960050;background-color:#1e0010">│</span> <span style="color:#ae81ff">1</span>       <span style="color:#960050;background-color:#1e0010">┆</span> <span style="color:#ae81ff">0022133222312323</span> <span style="color:#960050;background-color:#1e0010">┆</span> <span style="color:#ae81ff">64266</span>      <span style="color:#960050;background-color:#1e0010">┆</span> <span style="color:#ae81ff">7578</span>       <span style="color:#960050;background-color:#1e0010">┆</span> <span style="color:#ae81ff">2</span>     <span style="color:#960050;background-color:#1e0010">│</span>
+<span style="color:#960050;background-color:#1e0010">│</span> <span style="color:#ae81ff">1</span>       <span style="color:#960050;background-color:#1e0010">┆</span> <span style="color:#ae81ff">0022133222330012</span> <span style="color:#960050;background-color:#1e0010">┆</span> <span style="color:#ae81ff">158062</span>     <span style="color:#960050;background-color:#1e0010">┆</span> <span style="color:#ae81ff">14698</span>      <span style="color:#960050;background-color:#1e0010">┆</span> <span style="color:#ae81ff">1</span>     <span style="color:#960050;background-color:#1e0010">│</span>
+<span style="color:#960050;background-color:#1e0010">│</span> <span style="color:#ae81ff">1</span>       <span style="color:#960050;background-color:#1e0010">┆</span> <span style="color:#ae81ff">0022133222330030</span> <span style="color:#960050;background-color:#1e0010">┆</span> <span style="color:#ae81ff">126380</span>     <span style="color:#960050;background-color:#1e0010">┆</span> <span style="color:#ae81ff">5043</span>       <span style="color:#960050;background-color:#1e0010">┆</span> <span style="color:#ae81ff">3</span>     <span style="color:#960050;background-color:#1e0010">│</span>
+<span style="color:#960050;background-color:#1e0010">│</span> <span style="color:#ae81ff">1</span>       <span style="color:#960050;background-color:#1e0010">┆</span> <span style="color:#ae81ff">0022133222330031</span> <span style="color:#960050;background-color:#1e0010">┆</span> <span style="color:#ae81ff">87525</span>      <span style="color:#960050;background-color:#1e0010">┆</span> <span style="color:#ae81ff">10572</span>      <span style="color:#960050;background-color:#1e0010">┆</span> <span style="color:#ae81ff">3</span>     <span style="color:#960050;background-color:#1e0010">│</span>
+<span style="color:#960050;background-color:#1e0010">│</span> <span style="color:#ae81ff">1</span>       <span style="color:#960050;background-color:#1e0010">┆</span> <span style="color:#ae81ff">0022133222330032</span> <span style="color:#960050;background-color:#1e0010">┆</span> <span style="color:#ae81ff">58296</span>      <span style="color:#960050;background-color:#1e0010">┆</span> <span style="color:#ae81ff">8058</span>       <span style="color:#960050;background-color:#1e0010">┆</span> <span style="color:#ae81ff">13</span>    <span style="color:#960050;background-color:#1e0010">│</span>
+<span style="color:#960050;background-color:#1e0010">└─────────┴──────────────────┴────────────┴────────────┴───────┘</span>
+</code></pre></div>
+		</div>
+	  </div>
+	
+	  <div class="h-entry">
+		
+			<h1><a href="https://beckysweger.com/2025/01/27/a-few-small-repairs.html">A few small repairs</a></h1>
+		
+
+		<a href="https://beckysweger.com/2025/01/27/a-few-small-repairs.html" class="u-url"><time class="dt-published" datetime="2025-01-27 22:48:47 -0500">Jan 27, 2025</time></a>
+
+		<div class="e-content">
+			 <p>Some more micro-improvements in service to the <a href="https://beckysweger.com/2024/03/23/the-technical-debt-of-a.html">technical debt of a thousand paper cuts</a>:</p>
+<ul>
+<li><a href="https://osxdaily.com/2016/09/09/view-folder-tree-terminal-mac-os-tree-equivalent/">Installed tree on MacOS</a>.</li>
+<li>Switched terminals again, this time to <a href="https://ghostty.org/">Ghostty</a>. Warp was good (especially the <a href="https://docs.warp.dev/features/blocks">blocks</a>), but the ever-increasing AI focus got tedious.</li>
+<li>Installed a VSCode extension that <a href="https://marketplace.visualstudio.com/items?itemName=yzhang.markdown-all-in-one">renders GitHub-flavored markdown correctly</a>. No more mediocre markdown previews.</li>
+<li>Replaced the nano editor with <a href="https://micro-editor.github.io/">micro</a> because I want terminal stuff to be colorful by default.</li>
+<li>Began dropping <a href="https://setuptools-scm.readthedocs.io/en/stable/">setuptools-scm</a> into Python packages to handle dynamic versioning.</li>
+<li>Started using sparse git checkouts for working on subsets of big old repos.</li>
+</ul>
+
+		</div>
+	  </div>
+	
+	  <div class="h-entry">
+		
 			<h1><a href="https://beckysweger.com/2025/01/23/more-machines-more-python-setup.html">More machines, more Python setup problems</a></h1>
 		
 
