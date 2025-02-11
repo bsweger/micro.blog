@@ -24,48 +24,73 @@
 	
 	  <div class="h-entry">
 		
+			<h1><a href="https://beckysweger.com/2025/02/11/i-heard-you-like-usaspending.html">I heard you like usaspending data, so have a PostgreSQL</a></h1>
+		
+
+		<a href="https://beckysweger.com/2025/02/11/i-heard-you-like-usaspending.html" class="u-url"><time class="dt-published" datetime="2025-02-11 00:21:51 -0500">Feb 11, 2025</time></a>
+
+		<div class="e-content">
+			 <p>Working in the open has many upsides, one of which is the ability to share stories about a project without revealing anything proprietary.</p>
+<p>So this is a story about the software project that culminated in the 2017 relaunch of <a href="https://www.usaspending.gov/">usaspending.gov</a>.  Not only was the code open source (<a href="https://github.com/fedspendingtransparency">it still is</a>), but our JIRA tickets were open to all, and we had a website for collaborating with the public and other feds to develop the data standards that power the site.</p>
+<p>My time as the technical lead on that project is a career highlight, and it&rsquo;s been on my mind as usaspending.gov and all federal data are getting attention. Feeling an urge to archive, I recently checked to see if the usaspending backend database is still available to the public. <a href="https://onevoicecrm.my.site.com/usaspending/s/database-download">It is</a>!</p>
+<p>Having that PostgreSQL archive is important right now, but the original reason for making it available was a creative workaround to a software delivery conundrum</p>
+<p>The law behind an expanded and improved usaspending.gov (the <a href="https://www.congress.gov/bill/113th-congress/senate-bill/994">DATA Act</a>) mandated an implementation no later than May 2017. The team was maybe a sprint away from this deadline when we found a data aggregation bug that caused some incorrect totals on the test website. It was a relatively straightforward problem and absolutely fixable in the remaining time before launch.</p>
+<p>However, making that fix would mean no time to implement the last remaining &ldquo;must have&rdquo; feature before going live: a way to download the site&rsquo;s data. Providing the ability to download search results was not only a critical capability⎻it was something promised on the project&rsquo;s road map.</p>
+<p>And deviating from that roadmap would have been a sign of failure to the many people who believed that a government-wide, agile, open data software development project could not succeed.</p>
+<p>So we faced that classic software delivery quandry: can&rsquo;t move the date, can&rsquo;t change the scope.</p>
+<p>We obviously prioritized fixing the data bug. As for providing a data download feature, someone on the team had the idea to contact AWS, who made a <a href="https://aws.amazon.com/blogs/publicsector/announcing-usaspending-gov-on-an-amazon-rds-snapshot/">snapshot of our PostgreSQL database available as part of their open data program</a> in time for launch.¹</p>
+<p>Not a user-friendly download capability², but a download capability nonetheless. And that&rsquo;s the original reason for publishing a database snapshot for usaspending.gov.</p>
+<p>¹ It&rsquo;s not on AWS anymore, but the announcement page lives on!
+² A more traditional data download feature quickly followed the website&rsquo;s launch.</p>
+
+		</div>
+	  </div>
+	
+	  <div class="h-entry">
+		
 			<h1><a href="https://beckysweger.com/2025/02/04/using-polars-for-anonymous-access.html">Using Polars for anonymous access to public data on S3</a></h1>
 		
 
 		<a href="https://beckysweger.com/2025/02/04/using-polars-for-anonymous-access.html" class="u-url"><time class="dt-published" datetime="2025-02-04 20:45:57 -0500">Feb 4, 2025</time></a>
 
 		<div class="e-content">
-			 <p><a href="https://docs.pola.rs/">Polars</a> is a really handy go-to for working with public data hosted on AWS S3. Using Polars to get a <a href="https://docs.pola.rs/api/python/stable/reference/dataframe/index.html">DataFrame</a> via a bucket&rsquo;s HTTPS endpoint is straightforward:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">&gt;&gt;&gt;</span> df <span style="color:#f92672">=</span> pl<span style="color:#f92672">.</span>read_parquet(
-    <span style="color:#e6db74">&#34;https://ookla-open-data.s3.us-west-2.amazonaws.com/parquet/performance/type=fixed/year=2024/quarter=4/2024-10-01_performance_fixed_tiles.parquet&#34;</span>)
-
-<span style="color:#f92672">&gt;&gt;&gt;</span> df<span style="color:#f92672">.</span>select([<span style="color:#e6db74">&#34;quadkey&#34;</span>, <span style="color:#e6db74">&#34;avg_d_kbps&#34;</span>, <span style="color:#e6db74">&#34;avg_u_kbps&#34;</span>, <span style="color:#e6db74">&#34;tests&#34;</span>])<span style="color:#f92672">.</span>head()
-<span style="color:#960050;background-color:#1e0010">┌──────────────────┬────────────┬────────────┬───────┐</span>
-<span style="color:#960050;background-color:#1e0010">│</span> quadkey          <span style="color:#960050;background-color:#1e0010">┆</span> avg_d_kbps <span style="color:#960050;background-color:#1e0010">┆</span> avg_u_kbps <span style="color:#960050;background-color:#1e0010">┆</span> tests <span style="color:#960050;background-color:#1e0010">│</span>
-<span style="color:#960050;background-color:#1e0010">│</span> <span style="color:#f92672">---</span>              <span style="color:#960050;background-color:#1e0010">┆</span> <span style="color:#f92672">---</span>        <span style="color:#960050;background-color:#1e0010">┆</span> <span style="color:#f92672">---</span>        <span style="color:#960050;background-color:#1e0010">┆</span> <span style="color:#f92672">---</span>   <span style="color:#960050;background-color:#1e0010">│</span>
-<span style="color:#960050;background-color:#1e0010">│</span> str              <span style="color:#960050;background-color:#1e0010">┆</span> i64        <span style="color:#960050;background-color:#1e0010">┆</span> i64        <span style="color:#960050;background-color:#1e0010">┆</span> i64   <span style="color:#960050;background-color:#1e0010">│</span>
-<span style="color:#960050;background-color:#1e0010">╞══════════════════╪════════════╪════════════╪═══════╡</span>
-<span style="color:#960050;background-color:#1e0010">│</span> <span style="color:#ae81ff">0022133222312323</span> <span style="color:#960050;background-color:#1e0010">┆</span> <span style="color:#ae81ff">33682</span>      <span style="color:#960050;background-color:#1e0010">┆</span> <span style="color:#ae81ff">3278</span>       <span style="color:#960050;background-color:#1e0010">┆</span> <span style="color:#ae81ff">1</span>     <span style="color:#960050;background-color:#1e0010">│</span>
-<span style="color:#960050;background-color:#1e0010">│</span> <span style="color:#ae81ff">0022133222330031</span> <span style="color:#960050;background-color:#1e0010">┆</span> <span style="color:#ae81ff">97271</span>      <span style="color:#960050;background-color:#1e0010">┆</span> <span style="color:#ae81ff">14686</span>      <span style="color:#960050;background-color:#1e0010">┆</span> <span style="color:#ae81ff">2</span>     <span style="color:#960050;background-color:#1e0010">│</span>
-<span style="color:#960050;background-color:#1e0010">│</span> <span style="color:#ae81ff">0022133222330033</span> <span style="color:#960050;background-color:#1e0010">┆</span> <span style="color:#ae81ff">92047</span>      <span style="color:#960050;background-color:#1e0010">┆</span> <span style="color:#ae81ff">27325</span>      <span style="color:#960050;background-color:#1e0010">┆</span> <span style="color:#ae81ff">1</span>     <span style="color:#960050;background-color:#1e0010">│</span>
-<span style="color:#960050;background-color:#1e0010">│</span> <span style="color:#ae81ff">0022232311221201</span> <span style="color:#960050;background-color:#1e0010">┆</span> <span style="color:#ae81ff">537</span>        <span style="color:#960050;background-color:#1e0010">┆</span> <span style="color:#ae81ff">255</span>        <span style="color:#960050;background-color:#1e0010">┆</span> <span style="color:#ae81ff">1</span>     <span style="color:#960050;background-color:#1e0010">│</span>
-<span style="color:#960050;background-color:#1e0010">│</span> <span style="color:#ae81ff">0022302331120033</span> <span style="color:#960050;background-color:#1e0010">┆</span> <span style="color:#ae81ff">104525</span>     <span style="color:#960050;background-color:#1e0010">┆</span> <span style="color:#ae81ff">4896</span>       <span style="color:#960050;background-color:#1e0010">┆</span> <span style="color:#ae81ff">1</span>     <span style="color:#960050;background-color:#1e0010">│</span>
-<span style="color:#960050;background-color:#1e0010">└──────────────────┴────────────┴────────────┴───────┘</span>
-</code></pre></div><p>However, to read hive-partitioned S3 data or to specify a glob pattern, you&rsquo;ll need to use the <code>s3://</code> protocol. Polars supports this, but the documentation doesn&rsquo;t provide a clear example for bypassing a credentials check and accessing public data anonymously.</p>
-<p>Using the same dataset as above, here&rsquo;s the <code>storage_options</code> incantation that&rsquo;s akin to the AWS ClI&rsquo;s <code>--no-sign-request</code> option. In this example, 2024 is further partitioned into quarters; Polars detects the partitions and slurps multiple files into a single dataframe.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-python" data-lang="python"><span style="color:#f92672">&gt;&gt;&gt;</span> df1 <span style="color:#f92672">=</span> pl<span style="color:#f92672">.</span>read_parquet(
-<span style="color:#f92672">&gt;&gt;&gt;</span>    <span style="color:#e6db74">&#34;s3://ookla-open-data/parquet/performance/type=fixed/year=2024/&#34;</span>,
-<span style="color:#f92672">&gt;&gt;&gt;</span>    storage_options<span style="color:#f92672">=</span>{<span style="color:#e6db74">&#34;skip_signature&#34;</span>: <span style="color:#e6db74">&#34;true&#34;</span>}
+			 <p><a href="https://docs.pola.rs/">Polars</a> is a really handy go-to for working with public data hosted on AWS S3, and I prefer it over Pandas for most work these days. Using Polars to get a <a href="https://docs.pola.rs/api/python/stable/reference/dataframe/index.html">DataFrame</a> via a bucket&rsquo;s HTTPS endpoint is straightforward:</p>
+<pre tabindex="0"><code>df = pl.read_parquet(
+  &quot;https://ookla-open-data.s3.us-west-2.amazonaws.com/parquet/performance/type=fixed/year=2024/quarter=4/2024-10-01_performance_fixed_tiles.parquet&quot;
 )
 
-<span style="color:#f92672">&gt;&gt;&gt;</span> df1<span style="color:#f92672">.</span>select([<span style="color:#e6db74">&#34;quarter&#34;</span>, <span style="color:#e6db74">&#34;quadkey&#34;</span>, <span style="color:#e6db74">&#34;avg_d_kbps&#34;</span>, <span style="color:#e6db74">&#34;avg_u_kbps&#34;</span>, <span style="color:#e6db74">&#34;tests&#34;</span>])<span style="color:#f92672">.</span>head()
-<span style="color:#960050;background-color:#1e0010">┌─────────┬──────────────────┬────────────┬────────────┬───────┐</span>
-<span style="color:#960050;background-color:#1e0010">│</span> quarter <span style="color:#960050;background-color:#1e0010">┆</span> quadkey          <span style="color:#960050;background-color:#1e0010">┆</span> avg_d_kbps <span style="color:#960050;background-color:#1e0010">┆</span> avg_u_kbps <span style="color:#960050;background-color:#1e0010">┆</span> tests <span style="color:#960050;background-color:#1e0010">│</span>
-<span style="color:#960050;background-color:#1e0010">│</span> <span style="color:#f92672">---</span>     <span style="color:#960050;background-color:#1e0010">┆</span> <span style="color:#f92672">---</span>              <span style="color:#960050;background-color:#1e0010">┆</span> <span style="color:#f92672">---</span>        <span style="color:#960050;background-color:#1e0010">┆</span> <span style="color:#f92672">---</span>        <span style="color:#960050;background-color:#1e0010">┆</span> <span style="color:#f92672">---</span>   <span style="color:#960050;background-color:#1e0010">│</span>
-<span style="color:#960050;background-color:#1e0010">│</span> i64     <span style="color:#960050;background-color:#1e0010">┆</span> str              <span style="color:#960050;background-color:#1e0010">┆</span> i64        <span style="color:#960050;background-color:#1e0010">┆</span> i64        <span style="color:#960050;background-color:#1e0010">┆</span> i64   <span style="color:#960050;background-color:#1e0010">│</span>
-<span style="color:#960050;background-color:#1e0010">╞═════════╪══════════════════╪════════════╪════════════╪═══════╡</span>
-<span style="color:#960050;background-color:#1e0010">│</span> <span style="color:#ae81ff">1</span>       <span style="color:#960050;background-color:#1e0010">┆</span> <span style="color:#ae81ff">0022133222312323</span> <span style="color:#960050;background-color:#1e0010">┆</span> <span style="color:#ae81ff">64266</span>      <span style="color:#960050;background-color:#1e0010">┆</span> <span style="color:#ae81ff">7578</span>       <span style="color:#960050;background-color:#1e0010">┆</span> <span style="color:#ae81ff">2</span>     <span style="color:#960050;background-color:#1e0010">│</span>
-<span style="color:#960050;background-color:#1e0010">│</span> <span style="color:#ae81ff">1</span>       <span style="color:#960050;background-color:#1e0010">┆</span> <span style="color:#ae81ff">0022133222330012</span> <span style="color:#960050;background-color:#1e0010">┆</span> <span style="color:#ae81ff">158062</span>     <span style="color:#960050;background-color:#1e0010">┆</span> <span style="color:#ae81ff">14698</span>      <span style="color:#960050;background-color:#1e0010">┆</span> <span style="color:#ae81ff">1</span>     <span style="color:#960050;background-color:#1e0010">│</span>
-<span style="color:#960050;background-color:#1e0010">│</span> <span style="color:#ae81ff">1</span>       <span style="color:#960050;background-color:#1e0010">┆</span> <span style="color:#ae81ff">0022133222330030</span> <span style="color:#960050;background-color:#1e0010">┆</span> <span style="color:#ae81ff">126380</span>     <span style="color:#960050;background-color:#1e0010">┆</span> <span style="color:#ae81ff">5043</span>       <span style="color:#960050;background-color:#1e0010">┆</span> <span style="color:#ae81ff">3</span>     <span style="color:#960050;background-color:#1e0010">│</span>
-<span style="color:#960050;background-color:#1e0010">│</span> <span style="color:#ae81ff">1</span>       <span style="color:#960050;background-color:#1e0010">┆</span> <span style="color:#ae81ff">0022133222330031</span> <span style="color:#960050;background-color:#1e0010">┆</span> <span style="color:#ae81ff">87525</span>      <span style="color:#960050;background-color:#1e0010">┆</span> <span style="color:#ae81ff">10572</span>      <span style="color:#960050;background-color:#1e0010">┆</span> <span style="color:#ae81ff">3</span>     <span style="color:#960050;background-color:#1e0010">│</span>
-<span style="color:#960050;background-color:#1e0010">│</span> <span style="color:#ae81ff">1</span>       <span style="color:#960050;background-color:#1e0010">┆</span> <span style="color:#ae81ff">0022133222330032</span> <span style="color:#960050;background-color:#1e0010">┆</span> <span style="color:#ae81ff">58296</span>      <span style="color:#960050;background-color:#1e0010">┆</span> <span style="color:#ae81ff">8058</span>       <span style="color:#960050;background-color:#1e0010">┆</span> <span style="color:#ae81ff">13</span>    <span style="color:#960050;background-color:#1e0010">│</span>
-<span style="color:#960050;background-color:#1e0010">└─────────┴──────────────────┴────────────┴────────────┴───────┘</span>
-</code></pre></div>
+df.select([&quot;quadkey&quot;, &quot;avg_d_kbps&quot;, &quot;avg_u_kbps&quot;, &quot;tests&quot;]).head()
+┌──────────────────┬────────────┬────────────┬───────┐
+│ quadkey          ┆ avg_d_kbps ┆ avg_u_kbps ┆ tests │
+│ ---              ┆ ---        ┆ ---        ┆ ---   │
+│ str              ┆ i64        ┆ i64        ┆ i64   │
+╞══════════════════╪════════════╪════════════╪═══════╡
+│ 0022133222312323 ┆ 33682      ┆ 3278       ┆ 1     │
+│ 0022133222330031 ┆ 97271      ┆ 14686      ┆ 2     │
+│ 0022133222330033 ┆ 92047      ┆ 27325      ┆ 1     │
+│ 0022232311221201 ┆ 537        ┆ 255        ┆ 1     │
+│ 0022302331120033 ┆ 104525     ┆ 4896       ┆ 1     │
+└──────────────────┴────────────┴────────────┴───────┘
+</code></pre><p>However, to read hive-partitioned S3 data or to specify a glob pattern, you&rsquo;ll need to use the <code>s3://</code> protocol. Polars supports this, but the documentation doesn&rsquo;t provide a clear example for bypassing a credentials check and accessing public data anonymously.</p>
+<p>Using the same dataset as above, here&rsquo;s the <code>storage_options</code> incantation that&rsquo;s akin to the AWS CLI&rsquo;s <code>--no-sign-request</code> option. In this example, 2024 is further partitioned into quarters; Polars detects the partitions and slurps multiple files into a single dataframe.</p>
+<pre tabindex="0"><code>df1 = pl.read_parquet(
+  &quot;s3://ookla-open-data/parquet/performance/type=fixed/year=2024/&quot;,
+  storage_options={&quot;skip_signature&quot;: &quot;true&quot;}
+)
+
+df1.select([&quot;quarter&quot;, &quot;quadkey&quot;, &quot;avg_d_kbps&quot;, &quot;avg_u_kbps&quot;, &quot;tests&quot;]).head()
+┌─────────┬──────────────────┬────────────┬────────────┬───────┐
+│ quarter ┆ quadkey          ┆ avg_d_kbps ┆ avg_u_kbps ┆ tests │
+│ ---     ┆ ---              ┆ ---        ┆ ---        ┆ ---   │
+│ i64     ┆ str              ┆ i64        ┆ i64        ┆ i64   │
+╞═════════╪══════════════════╪════════════╪════════════╪═══════╡
+│ 1       ┆ 0022133222312323 ┆ 64266      ┆ 7578       ┆ 2     │
+│ 1       ┆ 0022133222330012 ┆ 158062     ┆ 14698      ┆ 1     │
+│ 1       ┆ 0022133222330030 ┆ 126380     ┆ 5043       ┆ 3     │
+│ 1       ┆ 0022133222330031 ┆ 87525      ┆ 10572      ┆ 3     │
+│ 1       ┆ 0022133222330032 ┆ 58296      ┆ 8058       ┆ 13    │
+└─────────┴──────────────────┴────────────┴────────────┴───────┘
+</code></pre>
 		</div>
 	  </div>
 	
@@ -197,28 +222,6 @@
 	
 	  <div class="h-entry">
 		
-			<h1><a href="https://beckysweger.com/2025/01/09/im-gonna-write-about-uv.html">uv run redux</a></h1>
-		
-
-		<a href="https://beckysweger.com/2025/01/09/im-gonna-write-about-uv.html" class="u-url"><time class="dt-published" datetime="2025-01-09 20:29:14 -0500">Jan 9, 2025</time></a>
-
-		<div class="e-content">
-			 <p>I&rsquo;m gonna write about <code>uv run</code> again, because it&rsquo;s just that handy!</p>
-<p>Lou Franco <a href="https://mastodon.social/@loufranco/113783255399204720">asked a very good question</a> about the <a href="https://beckysweger.com/2025/01/06/change-your-life-with-uv.html"><code>uv run</code> post from earlier in the week</a>:</p>
-<blockquote>
-<p>is there much that the sharer has to do? (I have a requirements.txt file)</p>
-</blockquote>
-<p>Nope! Assuming that the script and requirements.txt file are in the same directory (and that the person running the script has uv installed):</p>
-<p><code>uv run --with-requirements requirements.txt very-useful-script.py</code></p>
-<p>You could also <a href="https://docs.astral.sh/uv/guides/scripts/#declaring-script-dependencies">embed the requirements in the script itself</a>. Or install dependencies from <code>pyproject.toml</code> Or use an index other than PyPI. Or load some environment variables before running the script. It&rsquo;s all here: <a href="https://docs.astral.sh/uv/reference/cli/#uv-run">https://docs.astral.sh/uv/reference/cli/#uv-run</a></p>
-<p>It&rsquo;s one of the great things about uv. You can use it to manage an entire Python project, but you don&rsquo;t <em>have</em> to: just pick and choose what you need.</p>
-<p>P.S. Lou <a href="https://loufranco.com/">has a blog</a> and is <a href="https://loufranco.com/tech-debt-book">writing a book about tech debt</a>. You should read them!</p>
-
-		</div>
-	  </div>
-	
-	  <div class="h-entry">
-		
 			<h1><a href="https://beckysweger.com/2025/01/06/change-your-life-with-uv.html">Python &#43; uv run: sharing is caring</a></h1>
 		
 
@@ -241,322 +244,6 @@
 <li>Install <a href="https://docs.astral.sh/uv/">uv</a></li>
 <li>Use <a href="https://docs.astral.sh/uv/guides/scripts/"><code>uv run</code></a> to execute the script: <code>uv run very-useful-script.py</code></li>
 </ol>
-
-		</div>
-	  </div>
-	
-	  <div class="h-entry">
-		
-			<h1><a href="https://beckysweger.com/2025/01/02/skip-a-job-in-a.html">Skip a GitHub workflow job when running on a fork</a></h1>
-		
-
-		<a href="https://beckysweger.com/2025/01/02/skip-a-job-in-a.html" class="u-url"><time class="dt-published" datetime="2025-01-02 20:06:59 -0500">Jan 2, 2025</time></a>
-
-		<div class="e-content">
-			 <p>Skipping GitHub action jobs on forked repos is a surprisingly hard thing to Google. Most advice says to:</p>
-<ul>
-<li>disable workflows on the forked repo</li>
-<li>hard-code a check for the repo&rsquo;s owner name to determine whether or not it&rsquo;s a fork</li>
-</ul>
-<p>But I work on a <a href="https://github.com/reichlab/variant-nowcast-hub">repository at Day Job™️</a> that has many workflows, some of which are useful to external contributors who fork. Also, why give people manual instructions for something a computer can check?</p>
-<p>Secondly, the workflow in question is derived from a template used by other repository owners in our ecosystem. Ideally, there would be a solution that doesn&rsquo;t hard-code an owner name (so we can update the template itself).</p>
-<p>After following <a href="https://til.simonwillison.net/github-actions/dump-context">this advice from Simon Willison</a> about dumping the GitHub actions context, I stumbled upon <code>github.event.repository.fork</code> 🎉</p>
-<p>Here&rsquo;s what it looks like in practice—the job below will not run on a fork:</p>
-<pre tabindex="0"><code>jobs:
-  your-job:
-    # Don't run on forked repositories
-    if: github.event.repository.fork != true
-    runs-on: ubuntu-latest
-</code></pre>
-		</div>
-	  </div>
-	
-	  <div class="h-entry">
-		
-			<h1><a href="https://beckysweger.com/2024/12/31/this-aged-well-etc-etchttpsjawnsclubbendystraw.html">🎶 It&#39;s the most wonderful time of the year to mess around with your blog</a></h1>
-		
-
-		<a href="https://beckysweger.com/2024/12/31/this-aged-well-etc-etchttpsjawnsclubbendystraw.html" class="u-url"><time class="dt-published" datetime="2024-12-31 17:41:34 -0500">Dec 31, 2024</time></a>
-
-		<div class="e-content">
-			 <p>This idea did not age particularly well, given 2024&rsquo;s various WordPress dramas.</p>
-
-		
-			<blockquote class="toot-blockquote" cite="https://jawns.club@bendystraw/status/109979304645203691">
-				<div class="toot-header">
-					<a class="toot-profile" href="https://jawns.club/@bendystraw" rel="noopener">
-						<img
-							src="https://cdn.masto.host/jawnsclub/accounts/avatars/109/343/210/363/981/110/original/b91f4f8fd048987c.jpeg"
-							alt="Mastodon avatar for @bendystraw@jawns.club"
-							loading="lazy"
-							aria-hidden="true"
-						/>
-					</a>
-					<div class="toot-author">
-						<a class="toot-author-name" href="https://jawns.club/@bendystraw" rel="noopener">Becky Sweger</a>
-						<a class="toot-author-handle" href="https://jawns.club/@bendystraw" rel="noopener">@bendystraw@jawns.club</a>
-					</div>
-				</div><p>Considering going back to good old Wordpress (hosted, this time) so I can focus on actually writing blogs instead of reminding myself how Hugo works every 18 months or so</p>
-				<div class="toot-footer">
-					<a href="https://jawns.club/@bendystraw/109979304645203691" class="toot-date" rel="noopener">1:03 AM • March 7, 2023</a>&nbsp;<span class="pokey">(UTC)</span>
-				</div>
-			</blockquote>
-<p>So I moved everything to micro.blog, which lets you write in markdown while using a hosted service, so you don&rsquo;t have to upgrade hugo and remember how it works and submit a pull request whenever you want to write something.</p>
-<p>Also, it is my fervent hope that having a &ldquo;micro&rdquo; blog will silence the nagging voice insisting that each post must be a carefully crafted, highly-edited endeavor.</p>
-<p>2025 is the year of blogging&ndash;for real this time!</p>
-
-		</div>
-	  </div>
-	
-	  <div class="h-entry">
-		
-			<h1><a href="https://beckysweger.com/2024/03/23/the-technical-debt-of-a.html">The technical debt of a thousand paper cuts</a></h1>
-		
-
-		<a href="https://beckysweger.com/2024/03/23/the-technical-debt-of-a.html" class="u-url"><time class="dt-published" datetime="2024-03-23 14:05:05 -0500">Mar 23, 2024</time></a>
-
-		<div class="e-content">
-			 <!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-
-		</div>
-	  </div>
-	
-	  <div class="h-entry">
-		
-			<h1><a href="https://beckysweger.com/2024/01/08/theres-more-to-tech-than.html">There&#39;s more to tech than startups and large software companies</a></h1>
-		
-
-		<a href="https://beckysweger.com/2024/01/08/theres-more-to-tech-than.html" class="u-url"><time class="dt-published" datetime="2024-01-08 23:29:52 -0500">Jan 8, 2024</time></a>
-
-		<div class="e-content">
-			 <!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-
-		</div>
-	  </div>
-	
-	  <div class="h-entry">
-		
-			<h1><a href="https://beckysweger.com/2024/01/03/review-machine-learning-engineering-with.html">Review: Machine Learning Engineering With Python</a></h1>
-		
-
-		<a href="https://beckysweger.com/2024/01/03/review-machine-learning-engineering-with.html" class="u-url"><time class="dt-published" datetime="2024-01-03 16:39:30 -0500">Jan 3, 2024</time></a>
-
-		<div class="e-content">
-			 <!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-
-		</div>
-	  </div>
-	
-	  <div class="h-entry">
-		
-			<h1><a href="https://beckysweger.com/2021/12/23/we-named-our-data-warehouse.html">We named our data warehouse after a bacteria</a></h1>
-		
-
-		<a href="https://beckysweger.com/2021/12/23/we-named-our-data-warehouse.html" class="u-url"><time class="dt-published" datetime="2021-12-23 19:45:00 -0500">Dec 23, 2021</time></a>
-
-		<div class="e-content">
-			 <!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-
-		</div>
-	  </div>
-	
-	  <div class="h-entry">
-		
-			<h1><a href="https://beckysweger.com/2020/10/18/tech-hiring-the-streetlight-effect.html">Tech hiring: the streetlight effect</a></h1>
-		
-
-		<a href="https://beckysweger.com/2020/10/18/tech-hiring-the-streetlight-effect.html" class="u-url"><time class="dt-published" datetime="2020-10-18 20:21:00 -0500">Oct 18, 2020</time></a>
-
-		<div class="e-content">
-			 <!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
 
 		</div>
 	  </div>
