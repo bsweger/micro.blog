@@ -24,6 +24,65 @@
 	
 	  <div class="h-entry">
 		
+			<h1><a href="https://beckysweger.com/2025/02/27/pyprefab-principle-contributingmd-all-the.html">pyprefab principle - CONTRIBUTING.md all the time</a></h1>
+		
+
+		<a href="https://beckysweger.com/2025/02/27/pyprefab-principle-contributingmd-all-the.html" class="u-url"><time class="dt-published" datetime="2025-02-27 20:37:41 -0500">Feb 27, 2025</time></a>
+
+		<div class="e-content">
+			 <p>I threatened to write about the opinions that went into <a href="https://beckysweger.com/2025/02/24/pyprefab-if-you-need-to.html">pyprefab</a>, a command line interface that generates Python package scaffolding.</p>
+<p>To be honest, avoiding the doomscroll is part of the motivation for noodling around on this project. But I also really like having pyprefab as a central place to codify my project setup opinions, knowing that every change will be easily incorporated into future work.</p>
+<p>One practice I&rsquo;ve come to appreciate is including a <code>CONTRIBUTING.md</code> document in every project, even if I&rsquo;m the only contributor. Every package created via pyprefab gets one because I say so.</p>
+<h2 id="cyclical-coding">Cyclical coding</h2>
+<p>My non-work coding habits are very cyclical. New England winters are good for writing a bunch of Python and learning what&rsquo;s new, summers less so. I&rsquo;m writing this during sugaring season, which means mud season is coming up, along with the spring peepers and baseball. Finally, finally the world will start turning green, and spending free time with the laptop will be less appealing.</p>
+<p>Inevitably, the pendulum will swing back, and I&rsquo;ll return to an old project and wonder&hellip;how did that <code>.venv</code> get there? Are we doing the lockfile thing or using pip-compile to generate a requirements.txt? And what is that incantation for previewing the docs? <code>CONTRIBUTING.md</code> will be there with the answers.</p>
+
+		</div>
+	  </div>
+	
+	  <div class="h-entry">
+		
+			<h1><a href="https://beckysweger.com/2025/02/25/remember-the-club-that-thing.html">Don&#39;t let someone steal your airbag, read the directions!</a></h1>
+		
+
+		<a href="https://beckysweger.com/2025/02/25/remember-the-club-that-thing.html" class="u-url"><time class="dt-published" datetime="2025-02-25 22:29:44 -0500">Feb 25, 2025</time></a>
+
+		<div class="e-content">
+			 <!-- raw HTML omitted -->
+
+		</div>
+	  </div>
+	
+	  <div class="h-entry">
+		
+			<h1><a href="https://beckysweger.com/2025/02/24/pyprefab-if-you-need-to.html">uvx pyprefab: if you need to create a Python package real fast</a></h1>
+		
+
+		<a href="https://beckysweger.com/2025/02/24/pyprefab-if-you-need-to.html" class="u-url"><time class="dt-published" datetime="2025-02-24 23:51:36 -0500">Feb 24, 2025</time></a>
+
+		<div class="e-content">
+			 <p>The world doesn&rsquo;t need another Python app generator, but I made one anyway. It&rsquo;s called <a href="https://pypi.org/project/pyprefab/">pyprefab</a>, and it&rsquo;s a little cli that prompts for a few pieces of information and then creates a Python package that&rsquo;s ready to go (<em>e.g.</em>, script entry point, test suite, Sphinx docs, configured logs).</p>
+<p>Beyond having a way to quickly stand up new Python projects just the way I like &lsquo;em, my goals for working on pyprefab are:</p>
+<ul>
+<li>
+<p>I&rsquo;ve always worked on internal Python apps and wanted more experience releasing packages to PyPI.</p>
+</li>
+<li>
+<p>Using an app instead of, say, writing a <a href="https://cookiecutter.readthedocs.io/en/stable/index.html">cookiecutter</a> template makes it easier to test the boilerplate packages being created.</p>
+</li>
+<li>
+<p>I wanted something easily shareable at work. We&rsquo;ve already confirmed that uv <a href="https://beckysweger.com/2025/01/23/more-machines-more-python-setup.html">works on everyone&rsquo;s machine</a>, so now people can use <a href="https://docs.astral.sh/uv/concepts/tools/">uv tools</a> + pyprefab to spin up a new app without explicitly installing anything else:</p>
+<p><code>uvx pyprefab</code></p>
+</li>
+</ul>
+<p>pyprefab is opinionated, so I&rsquo;ll probably write about some of those opinions in the future.</p>
+<!-- raw HTML omitted -->
+
+		</div>
+	  </div>
+	
+	  <div class="h-entry">
+		
 			<h1><a href="https://beckysweger.com/2025/02/22/uv-python-pareto.html">uv: python pareto</a></h1>
 		
 
@@ -36,7 +95,7 @@
 <p>from <a href="https://www.bitecode.dev/p/a-year-of-uv-pros-cons-and-should">Kevin Samuel, A year of uv: pros, cons, and should you migrate</a></p>
 <p>After working as a data engineer at a tech company for nearly six years, on a team composed of software developers who all have the same zippy laptop and the luxury of knowing in advance where their code is going to run, I&rsquo;d almost forgotten about Python&rsquo;s bootstrapping challenges. After starting a new job on a small academic team, I had to remember pretty quickly.</p>
 <p>So much of the above article resonates with my recent experience of devising Python setup notes for a team of people with different operating systems who don&rsquo;t have administrative access to their machines.</p>
-<p>A delightful, highly-opinionated read.</p>
+<p>A delightful, highly-opinionated read about various Python pitfalls, their history, and how <a href="https://docs.astral.sh/uv/">uv</a> can solve nearly all of them.</p>
 
 		</div>
 	  </div>
@@ -180,7 +239,7 @@ df1.select([&quot;quarter&quot;, &quot;quadkey&quot;, &quot;avg_d_kbps&quot;, &q
 
 		<div class="e-content">
 			 <p>Finally published something to PyPi (Python&rsquo;s packaging index) after more than a decade of writing Python. It&rsquo;s not exactly new news, but the <a href="https://docs.pypi.org/trusted-publishers/">trusted publishing feature</a> is A++  and straightforward to set up if you use GitHub actions to write to PyPI</p>
-<p>When they first hear the lack of tokens, people can be pretty skeptical about OIDC + GitHub Actions + PyPy/AWS/whatever.  We&rsquo;ve been conditioned to equate long, weird-looking strings with security, so the idea of <em>not</em> having a long, weird-looking string seems wrong somehow.</p>
+<p>When they first hear about the lack of tokens, people can be pretty skeptical about OIDC + GitHub Actions + PyPy/AWS/whatever.  We&rsquo;ve been conditioned to equate long, weird-looking strings with security, so the idea of <em>not</em> having a long, weird-looking string seems wrong somehow.</p>
 <p>I&rsquo;ve struggled to explain clearly how the pieces fit together and was happy to stumble on this 2023 explainer from Trail of Bits, who worked with the Python Packaging Authority (PyPA) to implement trusted publishers. Bookmarked!</p>
 <p><a href="https://blog.trailofbits.com/2023/05/23/trusted-publishing-a-new-benchmark-for-packaging-security/">blog.trailofbits.com/2023/05/2&hellip;</a></p>
 
