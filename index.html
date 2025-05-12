@@ -24,6 +24,55 @@
 	
 	  <div class="h-entry">
 		
+			<h1><a href="https://beckysweger.com/2025/05/12/small-teams-and-minimum-viable.html">Small teams and minimum viable security</a></h1>
+		
+
+		<a href="https://beckysweger.com/2025/05/12/small-teams-and-minimum-viable.html" class="u-url"><time class="dt-published" datetime="2025-05-12 17:04:02 -0400">May 12, 2025</time></a>
+
+		<div class="e-content">
+			 <p>Much has been written about GitHub&rsquo;s enshittification and problematic predominance. But from a strictly practical perspective, GitHub remains an important tool for small, open-source research teams. All the code and people are there, and the cost of switching is high.</p>
+<p>During the past year, I&rsquo;ve also discovered that GitHub provides access to security tooling that would normally be out of reach for this kind of team. Small groups with limited software engineering bandwidth don&rsquo;t have time to configure and maintain things like automated code and dependency scanning. But they <em>can</em> go to their GitHub organization&rsquo;s security settings and turn on <a href="https://docs.github.com/en/code-security/securing-your-organization/enabling-security-features-in-your-organization/applying-the-github-recommended-security-configuration-in-your-organization#about-the-github-recommended-security-configuration">GitHub&rsquo;s recommended security settings</a>.</p>
+<p><a href="https://docs.github.com/en/code-security/securing-your-organization/enabling-security-features-in-your-organization/applying-the-github-recommended-security-configuration-in-your-organization">Push a few buttons</a>, and once a week your repos are scanned for potential code vulnerabilities and vulnerable dependencies. When a repo needs attention, a notification appears in its <em>Security</em> tag. That&rsquo;s it!</p>
+<p>For example, GitHub flagged this example workflow file as vulnerable:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yml" data-lang="yml"><span style="color:#f92672">name</span>: <span style="color:#ae81ff">run-code-checks</span>
+<span style="color:#f92672">on</span>: [<span style="color:#ae81ff">push]</span>
+<span style="color:#f92672">jobs</span>:
+  <span style="color:#f92672">run-checks</span>:
+    <span style="color:#f92672">runs-on</span>: <span style="color:#ae81ff">ubuntu-latest</span>
+    <span style="color:#f92672">steps</span>:
+      - <span style="color:#f92672">uses</span>: <span style="color:#ae81ff">actions/checkout@v4</span>
+      - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">Set up Python 3.10</span>
+        <span style="color:#f92672">uses</span>: <span style="color:#ae81ff">actions/setup-python@v5</span>
+        <span style="color:#f92672">with</span>:
+            <span style="color:#f92672">cache</span>: <span style="color:#e6db74">&#39;pip&#39;</span>
+      - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">install dependencies</span>
+        <span style="color:#f92672">run</span>: |<span style="color:#e6db74">
+</span><span style="color:#e6db74">          python -m pip install --upgrade pip
+</span><span style="color:#e6db74">          pip install -r requirements/requirements.txt</span>          
+      - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">lint</span>
+        <span style="color:#f92672">run</span>: |<span style="color:#e6db74">
+</span><span style="color:#e6db74">           </span>           <span style="color:#ae81ff">ruff check .</span>
+
+<span style="color:#f92672">Actions job or workflow does not limit the permissions of the GITHUB_TOKEN. Consider setting an explicit permissions block, using the following as a minimal starting point</span>: {<span style="color:#f92672">contents</span>: <span style="color:#ae81ff">read}</span>
+</code></pre></div><p>The alert then goes on to provide a full description of the problem and recommends a fix.</p>
+<p>Unobstrusive, helpful, and actionable. It also prompted me to read up on <a href="https://docs.github.com/en/actions/security-for-github-actions/security-guides/security-hardening-for-github-actions">best practices for securing GitHub actions
+</a> and incorporate them into the team&rsquo;s development and code review standards.</p>
+<p>You can go above and beyond the baseline security configuration (for example, setting up automated PRs for outdated dependencies<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>), but the built-in recommendations are a good place to start if the alternative is doing nothing⎼especially if you&rsquo;re writing software for external users.</p>
+<p>Kinda like <a href="https://beckysweger.com/2025/02/25/remember-the-club-that-thing.html">putting a club on your car</a> back in the day.</p>
+<section class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1" role="doc-endnote">
+<p>Which caused me to lose my mind, a story for another day&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</section>
+
+		</div>
+	  </div>
+	
+	  <div class="h-entry">
+		
 			<h1><a href="https://beckysweger.com/2025/05/01/mad-and-grateful-and-scared.html">Mad and grateful and scared and lucky</a></h1>
 		
 
