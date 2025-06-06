@@ -24,6 +24,24 @@
 	
 	  <div class="h-entry">
 		
+			<h1><a href="https://beckysweger.com/2025/06/05/quoting-chris-given-who-says.html">Quoting Chris Given, who says goodbye to IRS direct file</a></h1>
+		
+
+		<a href="https://beckysweger.com/2025/06/05/quoting-chris-given-who-says.html" class="u-url"><time class="dt-published" datetime="2025-06-05 23:20:19 -0400">Jun 5, 2025</time></a>
+
+		<div class="e-content">
+			 <p>Really enjoyed this post from Chris Given about the history of the IRS <a href="https://home.treasury.gov/policy-issues/inflation-reduction-act/irs-direct-file-service">Direct File service</a>, and a lot of it matches my own experience on the 2015-2017 era <a href="https://www.usaspending.gov/">USAspending.gov</a> project. Especially the part about assembling the team, which of course is the most important aspect of any large and &ldquo;doomed to fail&rdquo; undertaking.</p>
+<p>Nothing but admiration for the Direct File team, who came back from the dead several times to prove‒once again‒that the government can deliver great software.</p>
+<p>Thanks for showing how it&rsquo;s done, and thanks for the wise words:</p>
+<blockquote>
+<p>whatever you do, don’t try to express the logic of the Internal Revenue Code as YAML</p>
+</blockquote>
+
+		</div>
+	  </div>
+	
+	  <div class="h-entry">
+		
 			<h1><a href="https://beckysweger.com/2025/05/12/small-teams-and-minimum-viable.html">Small teams and minimum viable security</a></h1>
 		
 
@@ -41,7 +59,7 @@
     <span style="color:#f92672">runs-on</span>: <span style="color:#ae81ff">ubuntu-latest</span>
     <span style="color:#f92672">steps</span>:
       - <span style="color:#f92672">uses</span>: <span style="color:#ae81ff">actions/checkout@v4</span>
-      - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">Set up Python 3.10</span>
+      - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">Set up Python</span>
         <span style="color:#f92672">uses</span>: <span style="color:#ae81ff">actions/setup-python@v5</span>
         <span style="color:#f92672">with</span>:
             <span style="color:#f92672">cache</span>: <span style="color:#e6db74">&#39;pip&#39;</span>
@@ -50,8 +68,7 @@
 </span><span style="color:#e6db74">          python -m pip install --upgrade pip
 </span><span style="color:#e6db74">          pip install -r requirements/requirements.txt</span>          
       - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">lint</span>
-        <span style="color:#f92672">run</span>: |<span style="color:#e6db74">
-</span><span style="color:#e6db74">           </span>           <span style="color:#ae81ff">ruff check .</span>
+        <span style="color:#f92672">run</span>: <span style="color:#ae81ff">ruff check .</span>
 
 <span style="color:#f92672">Actions job or workflow does not limit the permissions of the GITHUB_TOKEN. Consider setting an explicit permissions block, using the following as a minimal starting point</span>: {<span style="color:#f92672">contents</span>: <span style="color:#ae81ff">read}</span>
 </code></pre></div><p>The alert then goes on to provide a full description of the problem and recommends a fix.</p>
@@ -73,7 +90,7 @@
 	
 	  <div class="h-entry">
 		
-			<h1><a href="https://beckysweger.com/2025/05/01/mad-and-grateful-and-scared.html">Mad and grateful and scared and lucky</a></h1>
+			<h1><a href="https://beckysweger.com/2025/05/01/mad-and-grateful-and-scared.html">Mad and grateful</a></h1>
 		
 
 		<a href="https://beckysweger.com/2025/05/01/mad-and-grateful-and-scared.html" class="u-url"><time class="dt-published" datetime="2025-05-01 17:32:04 -0400">May 1, 2025</time></a>
@@ -430,15 +447,15 @@ df1.select([&quot;quarter&quot;, &quot;quadkey&quot;, &quot;avg_d_kbps&quot;, &q
 <p>But other muscle memory commands don&rsquo;t work as well, especially those related to <code>pip</code>. By default,  <code>pip</code> isn&rsquo;t installed into uv virtual environments. So you have to do things like <code>uv pip list</code> instead of <code>pip list</code>.</p>
 <p>The uv <code>--seed</code> option fixes that by installing <code>pip</code> and other seed packages into the new environment: <code>uv venv --seed</code>.</p>
 <p>I ended up aliasing <code>uv venv</code> to <code>uv venv --seed</code> with the following function in ye old <code>.zshrc</code>:¹</p>
-<pre tabindex="0"><code class="language-script" data-lang="script">uv() {
-  if [ &quot;$1&quot; = &quot;venv&quot; ]; then
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">uv<span style="color:#f92672">()</span> <span style="color:#f92672">{</span>
+  <span style="color:#66d9ef">if</span> <span style="color:#f92672">[</span> <span style="color:#e6db74">&#34;</span>$1<span style="color:#e6db74">&#34;</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;venv&#34;</span> <span style="color:#f92672">]</span>; <span style="color:#66d9ef">then</span>
     shift
-    command uv venv --shell &quot;$@&quot;
-  else
-    command uv &quot;$@&quot;
-  fi
-}
-</code></pre><p>¹ Here&rsquo;s a scenario where GitHub Copilot is helpful.</p>
+    command uv venv --shell <span style="color:#e6db74">&#34;</span>$@<span style="color:#e6db74">&#34;</span>
+  <span style="color:#66d9ef">else</span>
+    command uv <span style="color:#e6db74">&#34;</span>$@<span style="color:#e6db74">&#34;</span>
+  <span style="color:#66d9ef">fi</span>
+<span style="color:#f92672">}</span>
+</code></pre></div><p>¹ Here&rsquo;s a scenario where GitHub Copilot is helpful.</p>
 
 		</div>
 	  </div>
