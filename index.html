@@ -24,13 +24,62 @@
 	
 	  <div class="h-entry">
 		
+			<h1><a href="https://beckysweger.com/2025/06/10/irs-direct-file-adr-highlights.html">IRS Direct File ADR Highlights</a></h1>
+		
+
+		<a href="https://beckysweger.com/2025/06/10/irs-direct-file-adr-highlights.html" class="u-url"><time class="dt-published" datetime="2025-06-10 23:55:21 -0400">Jun 10, 2025</time></a>
+
+		<div class="e-content">
+			 <p>The <a href="https://github.com/IRS-Public">newly-released source code</a> for<a href="https://directfile.irs.gov"> IRS Direct File</a> is a truly important artifact for:</p>
+<ul>
+<li>anyone who has tried to express the U.S. tax code programmatically</li>
+<li>anyone interested in how teams make technical decisions.</li>
+</ul>
+<p>The former group should check out the <a href="https://github.com/IRS-Public/direct-file/blob/main/docs/engineering/tax-flow/Tax_Code_to_Factgraph.pdf">Fact Graph</a>, which deserves its own post (IRS DAG, anyone?).</p>
+<p>For the latter, the repo&rsquo;s <a href="https://github.com/IRS-Public/direct-file/tree/main/docs">docs directory</a> has all kinds of rare treats. If you&rsquo;ve ever worked in government, you know how hard it is to publish <em>anything</em>, let alone something that describes your thinking or lessons learned. Much respect to the Direct File team for including artifacts about ther research and decisions.</p>
+<p>The themes of the project&rsquo;s <a href="https://github.com/IRS-Public/direct-file/tree/main/docs/adr">architectural decision records</a> (ADRs) are pragmatism and simplicity. Which isn&rsquo;t to say that Direct File is simple. My impression is that the team simply chose to spend more time on unsolved problems (<em>e.g.</em>, representing the tax code as a graph) and less time on solved problems (databases).</p>
+<p>These ADRs were some of my highlights, but they&rsquo;re all worth reading.</p>
+<h3 id="on-simple-databaseshttpsgithubcomirs-publicdirect-fileblobmaindocsadradr_user_supplied_infomd">On simple <a href="https://github.com/IRS-Public/direct-file/blob/main/docs/adr/adr_user_supplied_info.md">databases</a></h3>
+<blockquote>
+<p>The data we are planning to store is not so large as to cause a problem for any common RDBMS provider. There won&rsquo;t be any particular slowdown or read issues associated with reading the data out of the database.</p>
+</blockquote>
+<blockquote>
+<p>We can architect around having the database be a single point of failure in our system&hellip; If our database system does go completely down, our system will go down as well. Introducing another system doesn&rsquo;t solve that problem, and it in fact compounds the problem.</p>
+</blockquote>
+<p><strong>Spoiler:</strong> They went with Postgres</p>
+<h3 id="on-choosing-programming-languageshttpsgithubcomirs-publicdirect-fileblobmaindocsadradr-languagemd">On <a href="https://github.com/IRS-Public/direct-file/blob/main/docs/adr/adr-language.md">choosing programming languages</a></h3>
+<p>I confess to pouting a bit after realizing that DIrect File is Java-heavy, which is why I really appreciated this ADR.</p>
+<p>In addition to noting that the IRS is already a Java shop, the document lists a number of other <a href="https://github.com/IRS-Public/direct-file/blob/main/docs/adr/adr-language.md#technical-questions">technical considerations</a>, many of which aren&rsquo;t obvious to someone without tax domain experience. For example, Direct File needs a language that works well with WSDL/SOAP because that&rsquo;s the basis of the electronic filing system it integrates with (<a href="https://www.irs.gov/e-file-providers/modernized-e-file-program-information">IRS Modernized e-File system</a>).</p>
+<p>There&rsquo;s also a lot of Scala in Direct File, which seems like a strange choice for government. However, Scala has strong support for graph concepts and also runs on the JVM:</p>
+<blockquote>
+<p>All of the support systems are already in place within the IRS to update and manage Java systems. Except for the code, our systems will appear no different. They will use common Java libraries, common java tools, and require the same sorts of maintenance.</p>
+</blockquote>
+<p>Regarding Python/Node/Ruby, the ADR is tough but fair:</p>
+<blockquote>
+<p>we don&rsquo;t want to have to go through open source package management nightmares in a production application</p>
+</blockquote>
+<h3 id="on-deciding-against-microservices-for-the-data-import-systemhttpsgithubcomirs-publicdirect-fileblobmaindocsadrdata-import-systemmd">On <a href="https://github.com/IRS-Public/direct-file/blob/main/docs/adr/data-import-system.md">deciding against microservices for the data import system</a></h3>
+<blockquote>
+<p>Philosophically this works, but it adds a lot of failure points for very little gain at our current scale and set up</p>
+</blockquote>
+<p>Also:</p>
+<blockquote>
+<p>I would like to hear a solid reason why breaking this into multiple applications is worthwhile.</p>
+</blockquote>
+<p>Shout out to the old <em>Software Architecture: The Hard Parts</em> book club at Trello!</p>
+
+		</div>
+	  </div>
+	
+	  <div class="h-entry">
+		
 			<h1><a href="https://beckysweger.com/2025/06/05/quoting-chris-given-who-says.html">Quoting Chris Given, who says goodbye to IRS direct file</a></h1>
 		
 
 		<a href="https://beckysweger.com/2025/06/05/quoting-chris-given-who-says.html" class="u-url"><time class="dt-published" datetime="2025-06-05 23:20:19 -0400">Jun 5, 2025</time></a>
 
 		<div class="e-content">
-			 <p>Really enjoyed this post from Chris Given about the history of the IRS <a href="https://home.treasury.gov/policy-issues/inflation-reduction-act/irs-direct-file-service">Direct File service</a>, and a lot of it matches my own experience on the 2015-2017 era <a href="https://www.usaspending.gov/">USAspending.gov</a> project. Especially the part about assembling the team, which of course is the most important aspect of any large and &ldquo;doomed to fail&rdquo; undertaking.</p>
+			 <p>Really enjoyed this <a href="https://chrisgiven.com/2025/06/saying-goodbye/">post from Chris Given</a> about the history of the IRS <a href="https://home.treasury.gov/policy-issues/inflation-reduction-act/irs-direct-file-service">Direct File service</a>, and a lot of it matches my own experience on the 2015-2017 era <a href="https://www.usaspending.gov/">USAspending.gov</a> project. Especially the part about assembling the team, which of course is the most important aspect of any large and &ldquo;doomed to fail&rdquo; undertaking.</p>
 <p>Nothing but admiration for the Direct File team, who came back from the dead several times to prove‒once again‒that the government can deliver great software.</p>
 <p>Thanks for showing how it&rsquo;s done, and thanks for the wise words:</p>
 <blockquote>
